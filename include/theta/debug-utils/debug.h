@@ -2,6 +2,7 @@
 
 #include <fmt/format.h>
 
+#include <csignal>
 #include <filesystem>
 #include <functional>
 #include <source_location>

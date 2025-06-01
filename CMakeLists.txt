@@ -19,8 +19,15 @@ target_include_directories(
   debug PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_link_libraries(debug PUBLIC fmt::fmt)
 
+add_library(stacktrace-signal-handlers SHARED src/stacktrace-signal-handlers.cc)
+add_library(theta::stacktrace-signal-handlers ALIAS stacktrace-signal-handlers)
+target_include_directories(
+  stacktrace-signal-handlers
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+target_link_libraries(stacktrace-signal-handlers PUBLIC cpptrace fmt::fmt)
+
 install(
-  TARGETS debug
+  TARGETS debug stacktrace-signal-handlers
   EXPORT ${PROJECT_NAME}
   DESTINATION $ENV{dev})
 

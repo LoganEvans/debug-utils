@@ -4,7 +4,6 @@
   cpptrace,
   fmt,
   gtest,
-  ninja,
   src,
 }:
 let

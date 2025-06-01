@@ -2,27 +2,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <array>
-#include <cpptrace/cpptrace.hpp>
-#include <csignal>
-
-namespace {
-struct CpptraceSignalHandler {
-  CpptraceSignalHandler() {
-    for (const auto sig :
-         std::to_array({SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM})) {
-      std::signal(SIGSEGV, signal_handler);
-    }
-  }
-
-  static void signal_handler(int signal) {
-    fmt::print(stderr, "Caught signal: {}\n", signal);
-    cpptrace::generate_trace().print();
-    std::exit(signal);
-  }
-};
-CpptraceSignalHandler cpptrace_signal_handler{};
-}  // namespace
+#include "theta/debug-utils/debug.h"
 
 using ::testing::Eq;
 
