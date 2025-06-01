@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# nix
+build/
+result*
+source/
+output/
