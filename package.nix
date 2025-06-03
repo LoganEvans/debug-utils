@@ -18,9 +18,12 @@ clangStdenv.mkDerivation {
   ];
 
   buildInputs = [
+    gtest
+  ];
+
+  propagatedBuildInputs = [
     cpptrace
     fmt
-    gtest
   ];
 
   nativeBuildInputs = [

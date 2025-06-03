@@ -33,7 +33,7 @@ install(
 
 install(
   EXPORT ${PROJECT_NAME}
-  DESTINATION $ENV{dev}/lib/cmake
+  DESTINATION $ENV{dev}/lib/cmake/${PROJECT_NAME}
   FILE ${PROJECT_NAME}-config.cmake
   NAMESPACE theta::)
 
