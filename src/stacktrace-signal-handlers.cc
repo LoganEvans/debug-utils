@@ -8,15 +8,15 @@ namespace theta::debug_utils {
 
 struct InstallStacktraceSignalHandlers {
   InstallStacktraceSignalHandlers() {
-    for (const auto sig :
-         std::to_array({SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM})) {
-      std::signal(SIGSEGV, signal_handler);
+    for (const auto sig : std::to_array(
+             {SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM, SIGINT})) {
+      std::signal(sig, signal_handler);
     }
   }
 
   static void signal_handler(int signal) {
     fmt::print(stderr, "Caught signal: {}\n", signal);
-    cpptrace::generate_trace().print();
+    cpptrace::generate_trace().print_with_snippets();
     std::exit(signal);
   }
 };

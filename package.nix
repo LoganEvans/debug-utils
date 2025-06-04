@@ -32,6 +32,7 @@ clangStdenv.mkDerivation {
 
   dontStrip = true;
   cmakeBuildType = "RelWithDebInfo";
+  separateDebugInfo = true;
 
   doCheck = false;
 }
