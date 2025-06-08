@@ -10,14 +10,19 @@ struct InstallStacktraceSignalHandlers {
   InstallStacktraceSignalHandlers() {
     for (const auto sig : std::to_array(
              {SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM, SIGINT})) {
-      std::signal(sig, signal_handler);
+      std::signal(sig, signal_handler</*exit_on_signal=*/true>);
     }
+
+    std::signal(SIGUSR1, signal_handler</*exit_on_signal=*/false>);
   }
 
+  template <bool exit_on_signal = true>
   static void signal_handler(int signal) {
     fmt::print(stderr, "Caught signal: {}\n", signal);
     cpptrace::generate_trace().print_with_snippets();
-    std::exit(signal);
+    if constexpr (exit_on_signal) {
+      std::exit(signal);
+    }
   }
 };
 

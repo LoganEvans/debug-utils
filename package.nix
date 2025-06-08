@@ -14,7 +14,6 @@ clangStdenv.mkDerivation {
 
   outputs = [
     "out"
-    "dev"
   ];
 
   buildInputs = [

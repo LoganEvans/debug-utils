@@ -31,6 +31,12 @@
       {
         packages = rec {
           debug-utils = debug-utils-drv;
+
+          test = debug-utils-drv.overrideAttrs (attrs: {
+            cmakeBuildType = "Debug";
+            doCheck = true;
+          });
+
           default = debug-utils-drv;
         };
 
