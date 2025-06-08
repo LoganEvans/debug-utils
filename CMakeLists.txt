@@ -8,8 +8,8 @@ set(CMAKE_CXX_COMPILER "clang++")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdiagnostics-color=always")
+add_compile_options(-fdiagnostics-color=always -Wno-unused-command-line-argument)
+add_link_options(-Wno-unused-command-line-argument)
 
 add_compile_options(-Wno-unused-command-line-argument)
 add_link_options(-Wno-unused-command-line-argument)
@@ -30,7 +30,7 @@ target_link_libraries(stacktrace-signal-handlers PUBLIC cpptrace fmt::fmt)
 install(
   TARGETS debug-utils stacktrace-signal-handlers
   EXPORT ${PROJECT_NAME}
-  DESTINATION $ENV{out})
+  DESTINATION $ENV{out}/lib)
 
 install(
   EXPORT ${PROJECT_NAME}
